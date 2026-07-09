@@ -183,19 +183,28 @@ const initialUsers = [
     id: "1",
     email: "admin@pharmacy.com",
     name: "Admin User",
-    role: "admin"
+    role: "admin",
+    admin_id: "ADM001"
   },
   {
     id: "2",
     email: "manager@pharmacy.com",
     name: "Manager User",
-    role: "manager"
+    role: "manager",
+    certificate_number: "MGR001"
   },
   {
     id: "3",
     email: "pharmacist@pharmacy.com",
     name: "Pharmacist User",
-    role: "pharmacist"
+    role: "pharmacist",
+    license_number: "PHR001"
+  },
+  {
+    id: "4",
+    email: "patient@pharmacy.com",
+    name: "Patient User",
+    role: "patient"
   }
 ];
 
@@ -619,14 +628,18 @@ export const authService = {
     return Promise.reject(new Error("Invalid credentials"));
   },
   
-  register: async (email, password, name, role) => {
+  register: async (userData) => {
+    const { email, password, name, role, license_number, certificate_number, admin_id } = userData;
     const newUser = {
       id: generateId(),
       email,
       name,
-      role: role || "pharmacist",
+      role: role || "patient",
       created_date: new Date().toISOString(),
-      status: "نشط"
+      status: "نشط",
+      ...(license_number && { license_number }),
+      ...(certificate_number && { certificate_number }),
+      ...(admin_id && { admin_id }),
     };
     users.push(newUser);
     return Promise.resolve(newUser);

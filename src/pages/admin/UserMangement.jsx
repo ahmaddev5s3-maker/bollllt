@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Badge } from "../../components/ui/badge";
 import { useToast } from "../../components/ui/use-toast";
 import DataTable from "../../components/shared/DataTable";
+import { userService } from "../../lib/dataService";
 
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
@@ -14,7 +15,7 @@ export default function UserManagement() {
   const [search, setSearch] = useState("");
   const [inviteOpen, setInviteOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("user");
+  const [role, setRole] = useState("patient");
   const [submitting, setSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -33,7 +34,7 @@ export default function UserManagement() {
   useEffect(() => { loadUsers(); }, []);
 
   const filtered = users.filter(u =>
-    !search || u.full_name?.includes(search) || u.email?.includes(search)
+    !search || u.name?.includes(search) || u.email?.includes(search)
   );
 
   const handleInvite = async () => {
@@ -55,6 +56,7 @@ export default function UserManagement() {
     if (r === "admin") return "مدير";
     if (r === "manager") return "مدير مخزن";
     if (r === "pharmacist") return "صيدلي";
+    if (r === "patient") return "مريض";
     return "عميل";
   };
 
@@ -62,11 +64,12 @@ export default function UserManagement() {
     if (r === "admin") return "bg-purple-100 text-purple-700";
     if (r === "manager") return "bg-blue-100 text-blue-700";
     if (r === "pharmacist") return "bg-green-100 text-green-700";
+    if (r === "patient") return "bg-amber-100 text-amber-700";
     return "bg-gray-100 text-gray-700";
   };
 
   const columns = [
-    { key: "full_name", label: "الاسم" },
+    { key: "name", label: "الاسم" },
     { key: "email", label: "البريد الإلكتروني" },
     {
       key: "role", label: "الدور",
@@ -77,8 +80,29 @@ export default function UserManagement() {
       ),
     },
     {
+      key: "credential", label: "الترخيص/الشهادة",
+      render: (row) => {
+        if (row.role === "pharmacist") return row.license_number || "-";
+        if (row.role === "manager") return row.certificate_number || "-";
+        if (row.role === "admin") return row.admin_id || "-";
+        return "-";
+      },
+    },
+    {
+      key: "status", label: "الحالة",
+      render: (row) => (
+        <span className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
+          row.status === "نشط" ? "bg-green-100 text-green-700" :
+          row.status === "قيد المراجعة" ? "bg-amber-100 text-amber-700" :
+          "bg-gray-100 text-gray-700"
+        }`}>
+          {row.status || "نشط"}
+        </span>
+      ),
+    },
+    {
       key: "created_date", label: "تاريخ الانضمام",
-      render: (row) => new Date(row.created_date).toLocaleDateString("ar-SA"),
+      render: (row) => row.created_date ? new Date(row.created_date).toLocaleDateString("ar-SA") : "-",
     },
   ];
 
@@ -123,7 +147,7 @@ export default function UserManagement() {
                   <SelectItem value="admin">مدير</SelectItem>
                   <SelectItem value="manager">مدير مخزن</SelectItem>
                   <SelectItem value="pharmacist">صيدلي</SelectItem>
-                  <SelectItem value="user">عميل</SelectItem>
+                  <SelectItem value="patient">مريض</SelectItem>
                 </SelectContent>
               </Select>
             </div>

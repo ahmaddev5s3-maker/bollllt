@@ -1,17 +1,61 @@
 {
+  "name": "User",
+  "type": "object",
   "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "البريد الإلكتروني"
+    },
+    "name": {
+      "type": "string",
+      "title": "الاسم الكامل"
+    },
     "role": {
       "type": "string",
       "description": "The role of the user in the app",
       "enum": [
         "admin",
-        "user"
-      ]
+        "manager",
+        "pharmacist",
+        "patient"
+      ],
+      "title": "الدور"
+    },
+    "license_number": {
+      "type": "string",
+      "title": "رقم الترخيص/الشهادة المهنية",
+      "description": "Required for pharmacist role"
+    },
+    "certificate_number": {
+      "type": "string",
+      "title": "رقم الشهادة المهنية",
+      "description": "Required for manager role"
+    },
+    "admin_id": {
+      "type": "string",
+      "title": "رقم الهوية الإدارية",
+      "description": "Required for admin role"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "نشط",
+        "غير نشط",
+        "قيد المراجعة"
+      ],
+      "default": "نشط",
+      "title": "الحالة"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "تاريخ الإنشاء"
     }
   },
   "required": [
+    "email",
+    "name",
     "role"
-  ],
-  "name": "User",
-  "type": "object"
+  ]
 }
