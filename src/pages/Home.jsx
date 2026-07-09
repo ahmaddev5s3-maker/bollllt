@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, ShoppingCart, Pill, Truck, Clock, Shield, ChevronLeft, Plus, Minus, X, Upload, Check, Phone, Mail } from "lucide-react";
+import { Search, ShoppingCart, Pill, Truck, Clock, Shield, ChevronLeft, Plus, Minus, X, Upload, Check, Phone, Mail, MapPin, Navigation, Star, Sparkles, HeartPulse, Activity } from "lucide-react";
 import { Button } from "./../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Badge } from "../components/ui/badge";
@@ -16,43 +16,96 @@ const categories = ["الكل", "مسكنات", "مضادات حيوية", "في
 function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-bl from-orange-50 via-amber-50 to-white py-16 lg:py-24">
-      <div className="absolute top-10 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl" />
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl animate-pulse-slow animation-delay-2000" />
+        <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-green-100/40 rounded-full blur-2xl animate-float" />
+
+        {/* Floating pills animation */}
+        <div className="absolute top-20 right-1/4 animate-float animation-delay-1000">
+          <Pill className="w-8 h-8 text-primary/20" />
+        </div>
+        <div className="absolute bottom-32 left-1/3 animate-float animation-delay-3000">
+          <HeartPulse className="w-10 h-10 text-red-300/30" />
+        </div>
+        <div className="absolute top-40 left-20 animate-float animation-delay-2000">
+          <Activity className="w-6 h-6 text-green-400/30" />
+        </div>
+        <div className="absolute bottom-20 right-1/3 animate-float animation-delay-4000">
+          <Sparkles className="w-8 h-8 text-amber-400/20" />
+        </div>
+      </div>
+
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <Badge className="bg-primary/10 text-primary border-0 mb-4 text-sm px-3 py-1">صيدليتك الرقمية</Badge>
+          <div className="animate-fade-in-up">
+            <Badge className="bg-primary/10 text-primary border-0 mb-4 text-sm px-3 py-1 animate-bounce-subtle">
+              <Sparkles className="w-3 h-3 ml-1" />
+              صيدليتك الرقمية
+            </Badge>
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-5">
               أدويتك توصلك<br />
-              <span className="text-primary">بسرعة وأمان</span>
+              <span className="text-primary animate-gradient bg-gradient-to-r from-primary via-amber-600 to-primary bg-clip-text">بسرعة وأمان</span>
             </h1>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed max-w-md">
               تصفّح آلاف الأدوية والمكملات، وأضفها إلى سلتك لاستلامها من الصيدلية أو تسليمها إلى بابك.
             </p>
             <div className="flex flex-wrap gap-3">
               <a href="#catalog">
-                <Button size="lg" className="rounded-xl text-base px-8 h-12">ابدأ التسوق</Button>
+                <Button size="lg" className="rounded-xl text-base px-8 h-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <ShoppingCart className="w-5 h-5 ml-2" />
+                  ابدأ التسوق
+                </Button>
               </a>
               <Link to="/admin">
-                <Button variant="outline" size="lg" className="rounded-xl text-base px-8 h-12">دخول الفريق</Button>
+                <Button variant="outline" size="lg" className="rounded-xl text-base px-8 h-12 hover:bg-primary/5 transition-all duration-300">
+                  دخول الفريق
+                </Button>
               </Link>
             </div>
           </div>
-          <div className="hidden lg:block">
-            <img
-              src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?crop=entropy&cs=srgb&fm=jpg&q=85&w=600"
-              alt="صيدلية"
-              className="rounded-2xl shadow-xl w-full object-cover max-h-[400px]"
-            />
+          <div className="hidden lg:block relative animate-fade-in-up animation-delay-500">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-amber-200/20 rounded-3xl blur-2xl animate-pulse-slow" />
+              <img
+                src="https://images.unsplash.com/photo-1576602976047-174e57a678db?crop=entropy&cs=srgb&fm=jpg&q=85&w=600"
+                alt="صيدلية حديثة"
+                className="rounded-2xl shadow-2xl w-full object-cover max-h-[400px] relative z-10 hover:scale-[1.02] transition-transform duration-500"
+              />
+              <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-3 z-20 animate-slide-up animation-delay-1000">
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <Check className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">طلب ناجح</p>
+                    <p className="font-bold text-sm">+50,000</p>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-3 z-20 animate-slide-down animation-delay-1500">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">تقييم 4.9/5</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-12 max-w-lg">
+        <div className="grid grid-cols-3 gap-4 mt-12 max-w-lg animate-fade-in-up animation-delay-1000">
           {[
             { icon: Shield, label: "أدوية أصلية", value: "100%" },
             { icon: Truck, label: "توصيل سريع", value: "< 2 س" },
             { icon: Clock, label: "خدمة", value: "24/7" },
-          ].map((s) => (
-            <div key={s.label} className="bg-white/80 backdrop-blur rounded-xl p-3 text-center border border-border/50">
+          ].map((s, idx) => (
+            <div
+              key={s.label}
+              className="bg-white/80 backdrop-blur rounded-xl p-3 text-center border border-border/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              style={{ animationDelay: `${idx * 200}ms` }}
+            >
               <s.icon className="w-5 h-5 text-primary mx-auto mb-1" />
               <p className="text-lg font-bold text-foreground">{s.value}</p>
               <p className="text-[11px] text-muted-foreground">{s.label}</p>
@@ -64,17 +117,102 @@ function HeroSection() {
   );
 }
 
+function LocationSection() {
+  const pharmacyLocation = {
+    lat: 24.7136,
+    lng: 46.6753,
+    name: "صيدليتي - فرع الرياض",
+    address: "شارع العليا، حي الملقا، الرياض",
+    phone: "050-1234567",
+    workingHours: "24 ساعة"
+  };
+
+  return (
+    <section id="location" className="py-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <Badge className="bg-primary/10 text-primary border-0 mb-3 px-3 py-1">موقعنا</Badge>
+          <h2 className="text-3xl font-bold text-foreground mb-3">زورونا في صيدليتنا</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            نحن هنا لخدمتكم على مدار الساعة
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div className="bg-white rounded-2xl shadow-lg border border-border/50 overflow-hidden animate-fade-in-up">
+            <div className="p-6 border-b border-border/50">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-foreground text-lg mb-1">{pharmacyLocation.name}</h3>
+                  <p className="text-muted-foreground text-sm">{pharmacyLocation.address}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+                <Phone className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="text-xs text-muted-foreground">الهاتف</p>
+                  <p className="font-medium text-foreground">{pharmacyLocation.phone}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+                <Clock className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="text-xs text-muted-foreground">ساعات العمل</p>
+                  <p className="font-medium text-foreground">{pharmacyLocation.workingHours}</p>
+                </div>
+              </div>
+
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${pharmacyLocation.lat},${pharmacyLocation.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full mt-4"
+              >
+                <Button variant="outline" className="w-full rounded-xl h-11">
+                  <Navigation className="w-4 h-4 ml-2" />
+                  الحصول على الاتجاهات
+                </Button>
+              </a>
+            </div>
+          </div>
+
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-border/50 h-[400px] animate-fade-in-up animation-delay-500">
+            <iframe
+              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.8!2d${pharmacyLocation.lng}!3d${pharmacyLocation.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQyJzQ5LjAiTiA0NsKwNDAnMzEuMSJF!5e0!3m2!1sar!2ssa!4v1`}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="موقع الصيدلية"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function MedicineCard({ med, onAdd }) {
   return (
-    <div className="bg-white rounded-xl border border-border overflow-hidden group hover:shadow-md transition-shadow">
-      <div className="relative h-40 bg-muted/30">
+    <div className="bg-white rounded-xl border border-border overflow-hidden group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      <div className="relative h-40 bg-muted/30 overflow-hidden">
         <img
           src={med.image_url || "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?crop=entropy&cs=srgb&fm=jpg&q=85&w=400"}
           alt={med.name_ar}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         {med.requires_prescription && (
-          <Badge className="absolute top-2 right-2 bg-red-500 text-white text-[10px]">وصفة طبية</Badge>
+          <Badge className="absolute top-2 right-2 bg-red-500 text-white text-[10px] animate-pulse">وصفة طبية</Badge>
         )}
         {med.quantity <= 5 && med.quantity > 0 && (
           <Badge className="absolute top-2 left-2 bg-amber-500 text-white text-[10px]">كمية محدودة</Badge>
@@ -91,7 +229,7 @@ function MedicineCard({ med, onAdd }) {
           <span className="text-lg font-bold text-foreground">{med.price} ر.س</span>
           <Button
             size="sm"
-            className="rounded-lg h-8 text-xs"
+            className="rounded-lg h-8 text-xs hover:scale-105 active:scale-95 transition-transform duration-150"
             disabled={med.quantity === 0}
             onClick={() => onAdd(med)}
           >
@@ -204,6 +342,7 @@ export default function Home() {
     <div dir="rtl" className="min-h-screen bg-background">
       <Navbar cartCount={cart.length} />
       <HeroSection />
+      <LocationSection />
 
       {/* Catalog */}
       <section id="catalog" className="max-w-6xl mx-auto px-4 py-12">
@@ -382,9 +521,9 @@ export default function Home() {
       </Dialog>
 
       {/* About Section */}
-      <section id="about" className="bg-gradient-to-bl from-orange-50 via-amber-50 to-white py-16">
+      <section id="about" className="bg-gradient-to-bl from-orange-50 via-amber-50 to-white py-16 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl font-bold text-foreground mb-3">عن صيدليتي</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               نحن نقدم خدمات صيدلية متكاملة مع التزام تام بالجودة والسلامة
@@ -392,38 +531,26 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-border/50 text-center">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-7 h-7 text-primary" />
+            {[
+              { icon: Shield, title: "أدوية أصلية 100%", desc: "جميع منتجاتنا مصدقة من الجهات الرسمية ومضمونة الجودة" },
+              { icon: Truck, title: "توصيل سريع", desc: "خدمة توصيل سريعة وموثوقة إلى باب منزلك في أقل من ساعتين" },
+              { icon: Clock, title: "خدمة 24/7", desc: "فريقنا متاح على مدار الساعة لخدمتكم وتلبية احتياجاتكم" },
+            ].map((item, idx) => (
+              <div
+                key={item.title}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-border/50 text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-fade-in-up"
+                style={{ animationDelay: `${idx * 200}ms` }}
+              >
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <item.icon className="w-7 h-7 text-primary animate-pulse" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
               </div>
-              <h3 className="font-semibold text-foreground mb-2">أدوية أصلية 100%</h3>
-              <p className="text-sm text-muted-foreground">
-                جميع منتجاتنا مصدقة من الجهات الرسمية ومضمونة الجودة
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-border/50 text-center">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Truck className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">توصيل سريع</h3>
-              <p className="text-sm text-muted-foreground">
-                خدمة توصيل سريعة وموثوقة إلى باب منزلك في أقل من ساعتين
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-border/50 text-center">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">خدمة 24/7</h3>
-              <p className="text-sm text-muted-foreground">
-                فريقنا متاح على مدار الساعة لخدمتكم وتلبية احتياجاتكم
-              </p>
-            </div>
+            ))}
           </div>
 
-          <div className="mt-12 bg-white rounded-2xl p-8 shadow-sm border border-border/50">
+          <div className="mt-12 bg-white rounded-2xl p-8 shadow-sm border border-border/50 animate-fade-in-up animation-delay-1000">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-3">رؤيتنا</h3>
@@ -432,19 +559,24 @@ export default function Home() {
                 </p>
                 <h3 className="text-xl font-bold text-foreground mb-3">قيمنا</h3>
                 <ul className="text-muted-foreground space-y-2">
-                  <li>• الجودة والسلامة في كل منتج</li>
-                  <li>• الاحترام والتعامل الإنساني</li>
-                  <li>• الشفافية في الأسعار والخدمات</li>
-                  <li>• الالتزام بالمعايير المهنية</li>
+                  {["الجودة والسلامة في كل منتج", "الاحترام والتعامل الإنساني", "الشفافية في الأسعار والخدمات", "الالتزام بالمعايير المهنية"].map((val, i) => (
+                    <li key={i} className="flex items-center gap-2 hover:translate-x-1 transition-transform">
+                      <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                      {val}
+                    </li>
+                  ))}
                 </ul>
               </div>
-              <div className="bg-gradient-to-br from-primary/5 to-amber-50 rounded-xl p-6 text-center">
-                <div className="text-4xl font-bold text-primary mb-2">+10</div>
-                <p className="text-sm text-muted-foreground mb-4">سنوات من الخبرة</p>
-                <div className="text-4xl font-bold text-primary mb-2">+50K</div>
-                <p className="text-sm text-muted-foreground mb-4">عميل سعيد</p>
-                <div className="text-4xl font-bold text-primary mb-2">+1000</div>
-                <p className="text-sm text-muted-foreground">منتج طبي</p>
+              <div className="bg-gradient-to-br from-primary/5 to-amber-50 rounded-xl p-6 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                <div className="relative z-10">
+                  <div className="text-4xl font-bold text-primary mb-2 animate-bounce-subtle">+10</div>
+                  <p className="text-sm text-muted-foreground mb-4">سنوات من الخبرة</p>
+                  <div className="text-4xl font-bold text-primary mb-2 animate-bounce-subtle animation-delay-500">+50K</div>
+                  <p className="text-sm text-muted-foreground mb-4">عميل سعيد</p>
+                  <div className="text-4xl font-bold text-primary mb-2 animate-bounce-subtle animation-delay-1000">+1000</div>
+                  <p className="text-sm text-muted-foreground">منتج طبي</p>
+                </div>
               </div>
             </div>
           </div>
@@ -452,37 +584,32 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16">
+      <section id="contact" className="py-16 bg-muted/30">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl font-bold text-foreground mb-3">اتصل بنا</h2>
             <p className="text-muted-foreground">نحن هنا لمساعدتك على مدار الساعة</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl p-6 border border-border/50 text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <Phone className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-1">الهاتف</h3>
-              <p className="text-sm text-muted-foreground">050-1234567</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 border border-border/50 text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <Mail className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-1">البريد الإلكتروني</h3>
-              <p className="text-sm text-muted-foreground">info@pharmacy.com</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 border border-border/50 text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <Clock className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-1">ساعات العمل</h3>
-              <p className="text-sm text-muted-foreground">24 ساعة / 7 أيام</p>
-            </div>
+            {[
+              { icon: Phone, title: "الهاتف", value: "050-1234567", href: "tel:0501234567" },
+              { icon: Mail, title: "البريد الإلكتروني", value: "info@pharmacy.com", href: "mailto:info@pharmacy.com" },
+              { icon: Clock, title: "ساعات العمل", value: "24 ساعة / 7 أيام", href: null },
+            ].map((item, idx) => (
+              <a
+                key={item.title}
+                href={item.href || "#"}
+                className="bg-white rounded-xl p-6 border border-border/50 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in-up group"
+                style={{ animationDelay: `${idx * 150}ms` }}
+              >
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
+                  <item.icon className="w-6 h-6 text-primary group-hover:animate-bounce-subtle" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
+                <p className="text-sm text-muted-foreground group-hover:text-primary transition-colors">{item.value}</p>
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -490,13 +617,13 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-white border-t border-border py-8 mt-12">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+          <div className="flex items-center justify-center gap-2 mb-3 animate-fade-in-up">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center animate-pulse-slow">
               <Pill className="w-4 h-4 text-white" />
             </div>
             <span className="font-bold text-foreground">صيدليتي</span>
           </div>
-          <p className="text-sm text-muted-foreground">© 2026 صيدليتي - جميع الحقوق محفوظة</p>
+          <p className="text-sm text-muted-foreground animate-fade-in animation-delay-500">© 2026 صيدليتي - جميع الحقوق محفوظة</p>
         </div>
       </footer>
     </div>
