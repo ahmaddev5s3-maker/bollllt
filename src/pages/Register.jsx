@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Label } from "./../components/ui/label";
+import { Label } from "../components/ui/label";
 import { UserPlus, Mail, Lock, Loader2, Shield, User, BriefcaseMedical, Building2 } from "lucide-react";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../components/ui/input-otp";
 import AuthLayout from "../components/AuthLayout";
@@ -142,19 +142,21 @@ export default function Register() {
   }
 
   return (
-    <AuthLayout
-      icon={UserPlus}
-      title="إنشاء حساب جديد"
-      subtitle="سجل للبدء في استخدام النظام"
-      footer={
-        <>
-          لديك حساب بالفعل؟{" "}
-          <Link to="/login" className="text-primary font-medium hover:underline">
-            سجل دخول
-          </Link>
-        </>
-      }
-    >
+    <div className="min-h-screen bg-background">
+      <Navbar cartCount={0} />
+      <AuthLayout
+        icon={UserPlus}
+        title="إنشاء حساب جديد"
+        subtitle="سجل للبدء في استخدام النظام"
+        footer={
+          <>
+            لديك حساب بالفعل؟{" "}
+            <Link to="/login" className="text-primary font-medium hover:underline">
+              سجل دخول
+            </Link>
+          </>
+        }
+      >
       <Button
         variant="outline"
         className="w-full h-12 text-sm font-medium mb-6"
